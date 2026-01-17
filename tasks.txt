@@ -1,0 +1,146 @@
+""project market""
+
+Registratsiya
+    username
+    password
+    email
+    phone
+
+    Market
+        name 
+        addres
+        contact
+        lisence
+    
+    Individual
+        name
+        addres
+        contact
+
+    Customer
+
+verifikation - email
+admin verify - 
+change password
+email link
+login
+logout
+
+    Customer (qilishi mumkin ishlar)
+        search
+        cart 
+        order
+        comment
+        like
+        saved
+
+    Market (nima qilishi mumkin)
+        crud prodact
+        statistika
+        all reviews - filter
+        discount/ promo code
+        promote products
+
+
+    Individual (qilishi mumkin ishlar)
+        crud prodact
+        statistika
+        all reviews
+
+User
+    user_type
+    username
+    password
+    email
+    phone
+    name 
+    addres
+    contact
+    lisenc
+    
+
+
+
+Catalog
+    name
+    icon
+
+    Category
+        catalog 
+        name
+        icon
+
+        SubCategory
+            subcategory 
+            name
+            icon
+            
+            Product
+            name
+            subcategory
+            supplier
+            unit_in_stock
+            unit_in_order
+            price 
+            rating
+            description
+            discount
+            view
+
+ProductColot
+    Product
+    image         
+
+ProductImage
+    Product
+    image
+
+
+Cart
+    user 
+
+CartItem
+    cart
+    product
+    quantity
+
+Order 
+    user
+    status
+    promocode
+
+OrderItem
+    order
+    product
+    quantity
+    discount
+
+Review 
+    Product
+    user
+    rate
+    pros 
+    cous
+    image
+
+Feeback
+    user
+    text
+    image
+
+Contact Us
+    email 
+    telegtam_bot
+
+Shepment
+    addres
+    phone
+    email
+
+Like 
+    user
+    product
+
+Saved 
+    user 
+    product
