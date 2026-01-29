@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +26,10 @@ SECRET_KEY = 'django-insecure-jz6pn#x902xj$k1befdn2zuijpk&e3xf5f%(t(74-9+3lpau-g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Application definition
 
@@ -60,7 +63,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,7 +75,10 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'config.wsgi.application'
+SITE_URL = '127.0.0.1:8000/'
 
 
 # Database
@@ -84,6 +90,22 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'firdavsboysunov04@gmail.com'
+EMAIL_HOST_PASSWORD = 'ejym xloj biko kuib'
+EMAIL_HOST_NAME = 'Your organization Name'
+DEFAULT_FROM_EMAIL = f'ijasmin <{EMAIL_HOST_USER}>'
+
+# Source - https://stackoverflow.com/q/64618262
+# Posted by Abbracx
+# Retrieved 2026-01-29, License - CC BY-SA 4.0
+
+
 
 
 # Password validation
@@ -127,4 +149,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.User'
+
