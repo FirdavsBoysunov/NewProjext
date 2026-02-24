@@ -8,6 +8,7 @@
 <body>
     {% if verified %}
         <h1>You are verified</h1>
+        <a herf="{% url 'login' %}">Back to site</a>
     {% else %}
         <h1>You are not verified</h1>
     {% endif %}

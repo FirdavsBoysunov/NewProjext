@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import *
-from django.views.generic import CreateView, View
+from django.views.generic import CreateView, View, TemplateView
 from .models import CustomUser
 from django.core.signing import Signer
 from django.urls import reverse
 from utils.functions import send_verification_email
+from django.contrib.auth import authenticate, login, logout
+
 signer = Signer()
 
 class RegisterView(CreateView):
@@ -35,10 +37,43 @@ class VerifayEmailView(View):
     def get(self, request):
         token = request.GET.get("token")
         user_id = signer.unsign(token)
+        context = {"verifed":False}
         try:
 
-            CustomUser.objects.get(id = user_id)
-            return render(request, 'user/email-verified.html', {"verified": True})
+            user = CustomUser.objects.get(id = user_id)
+            user.verify_email
+            context["verifed"] = True
         except:
-            return render(request, 'user/email-verified.html', {"verified": False})
+            pass
+            return render(request, 'user/email-verified.html',context)
 
+class LoginView(View):
+
+    def get(self, request):
+        return render(request, 'user/login.html')
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(request,**form.cleaned_data)
+            if not user or not user.email_verified:
+                return render(request, 'user/login.html',{"error":"user not found or not verified"})
+            login(request,user)
+            return redirect("home")    
+        return render(request, 'user/login.html',{"error":"enter valid data"})
+
+
+class HomeView(TemplateView):
+
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = {'message':'leyohouu!'}
+        return context
+    
+
+
+class LogoutView(View):
+
+    def get(self, request):
+        logout(request)
+        return redirect("login")

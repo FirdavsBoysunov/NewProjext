@@ -19,6 +19,10 @@ class CustomUser(AbstractUser, ModelWithTimeStamp):
     email_verified = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
 
+    @property
+    def verify_email(self):
+        self.email_verified = True
+        self.save()
 
 class Customer(CustomUser):
 
